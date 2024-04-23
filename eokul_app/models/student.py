@@ -4,7 +4,7 @@ from django.db import models
 class Student(models.Model):
 
     class Meta(object):
-        db_table = "Student"
+        db_table = "student"
         app_label = "eokul_app"
 
     first_name = models.CharField(max_length=50)
