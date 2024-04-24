@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import EmailValidator, MinLengthValidator
+from django.core.validators import MinLengthValidator
 from eokul_app.models.base import BaseModel
 
 class Administrator(BaseModel):
