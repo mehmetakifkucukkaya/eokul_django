@@ -13,7 +13,16 @@
     <title>E Okul App</title>
   </head>
   <body>
-    {% block content %}{% endblock content %}
+    <div class="container mt-5">
+      <h1>Öğrenci Girişi</h1>
+      {% include "partials/_student_login_form.html" %}
+    </div>
+
+    <div class="container mt-5">
+      <h1>Admin Girişi</h1>
+      {% include "partials/_admin_login_form.html" %}
+    </div>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
       integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="

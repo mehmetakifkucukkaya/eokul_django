@@ -12,7 +12,7 @@ def student_login(request):
         student = Student.objects.filter(tc_no=tc_no, std_no=std_no).first()
         
         if student is not None:
-            # login(request, student)
+            request.session['student'] = student.id
             return HttpResponseRedirect('/student/dashboard/')  # Öğrenci panosuna yönlendir
         else:
             return HttpResponse('Geçersiz öğrenci bilgileri.')
@@ -20,6 +20,10 @@ def student_login(request):
     return render(request, 'login.html')
 
 
-# @login_required
 def student_dashboard(req):
-    return HttpResponse("Student Dashboard")
+    
+    if 'student' in req.session:
+        return HttpResponse("Student Dashboard")
+    
+    else :
+        return HttpResponseRedirect('/')
