@@ -1,7 +1,9 @@
 from django.db import models
 
+from eokul_app.models.base import BaseModel
 
-class Lesson(models.Model):
+
+class Lesson(BaseModel):
 
     class Meta(object):
         db_table = "lesson"
@@ -10,7 +12,4 @@ class Lesson(models.Model):
     lesson_code = models.CharField(max_length=6)
     lesson_text = models.CharField(max_length=50)
 
-    """Her tabloya özel zaman damgaları, deleted_time soft delete yapmak için kullanılacak"""
-    created_time = models.DateTimeField()
-    updated_time = models.DateTimeField()
-    deleted_time = models.DateTimeField()
+    

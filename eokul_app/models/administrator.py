@@ -1,7 +1,9 @@
 from django.db import models
 
+from eokul_app.models.base import BaseModel
 
-class Administrator(models.Model):
+
+class Administrator(BaseModel):
 
     class Meta(object):
         db_table = "administrator"
@@ -13,7 +15,4 @@ class Administrator(models.Model):
     password = models.CharField(max_length=16)
     authority = models.CharField(max_length=15)
 
-    """Her tabloya özel zaman damgaları, deleted_time soft delete yapmak için kullanılacak"""
-    created_time = models.DateTimeField()
-    updated_time = models.DateTimeField()
-    deleted_time = models.DateTimeField()
+  
