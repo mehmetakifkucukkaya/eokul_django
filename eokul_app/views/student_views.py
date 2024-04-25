@@ -36,4 +36,5 @@ def student_dashboard(req):
         return render(req, "eokul_app/student_dashboard.html")
     
     else :
-        return HttpResponseRedirect('/')
+        redirect_url = reverse("index")
+        return HttpResponseRedirect(redirect_url)

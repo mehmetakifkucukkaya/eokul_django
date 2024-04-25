@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
@@ -9,10 +10,20 @@ def admin_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        admin = Administrator.objects.filter(username =username, password = password )
+        admin = Administrator.objects.filter(username =username, password = password ).first()
+        
+        
         
         if admin is not None:
-            request.session['admin'] = admin.id
+            serialized_admin = {
+                'id' : admin.id,
+                "first_name" : admin.first_name,
+                'last_name' : admin.last_name,
+                "username" : admin.username,
+                "password" : admin.password,
+                "authority" : admin.authority
+            }
+            request.session['admin'] = json.dumps(serialized_admin)
             redirect_url = reverse("admin-dashboard")
             return HttpResponseRedirect(redirect_url)  # Admin panosuna yönlendir
         else:
@@ -22,4 +33,10 @@ def admin_login(request):
 
 
 def admin_dashboard(req):
-    return HttpResponse("Admin Sayfası")
+    
+    if 'admin' in req.session:
+        return render(req, "eokul_app/admin_dashboard.html")
+    
+    else :
+        redirect_url = reverse("index")
+        return HttpResponseRedirect(redirect_url)
