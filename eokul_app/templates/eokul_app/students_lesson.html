@@ -1,0 +1,7 @@
+{% extends "eokul_app/student_dashboard.html" %} {% block section %}
+<ul>
+  {% for lesson in lessons %}
+  <li>{{lesson.lesson_text}}</li>
+  {% endfor %}
+</ul>
+{% endblock section %}
