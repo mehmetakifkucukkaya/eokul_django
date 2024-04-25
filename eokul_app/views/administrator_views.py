@@ -1,8 +1,8 @@
 import json
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from eokul_app.permission import is_admin_login
 from eokul_app.models import Administrator
 
 
@@ -32,9 +32,9 @@ def admin_login(request):
     return render(request, 'login.html')
 
 
-def admin_dashboard(req):
+def admin_dashboard(req, username):
     
-    if 'admin' in req.session:
+    if is_admin_login(req, username):
         return render(req, "eokul_app/admin_dashboard.html")
     
     else :

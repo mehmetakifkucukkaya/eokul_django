@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
+from eokul_app.permission import is_student_login
 from eokul_app.models.student import Student
 
 def student_login(request):
@@ -31,9 +31,11 @@ def student_login(request):
 
 
 def student_dashboard(req, std_no):
-    
-    if 'student' in req.session and req.session["student"].__contains__(std_no):
-        return render(req, "eokul_app/student_dashboard.html")
+    if is_student_login(req, std_no):
+        context = {
+            "std_no" : std_no
+        }
+        return render(req, "eokul_app/student_dashboard.html" , context)
     
     else :
         redirect_url = reverse("index")
