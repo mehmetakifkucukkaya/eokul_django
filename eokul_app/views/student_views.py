@@ -22,7 +22,7 @@ def student_login(request):
                 "absentee" : student.absentee
             }
             request.session['student'] = json.dumps(serialized_student)
-            redirect_url = reverse("student-dashboard")
+            redirect_url = reverse("student-dashboard", args=[student.std_no])
             return HttpResponseRedirect(redirect_url)  # Öğrenci panosuna yönlendir
         else:
             return HttpResponse('Geçersiz öğrenci bilgileri.')
@@ -30,9 +30,9 @@ def student_login(request):
     return render(request, 'login.html')
 
 
-def student_dashboard(req):
+def student_dashboard(req, std_no):
     
-    if 'student' in req.session:
+    if 'student' in req.session and req.session["student"].__contains__(std_no):
         return render(req, "eokul_app/student_dashboard.html")
     
     else :
