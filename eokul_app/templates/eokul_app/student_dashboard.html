@@ -1,0 +1,27 @@
+{% extends "index.html" %} {% block content %}
+<div class="container-fluid p-3">
+  <h3>Öğrenci Bölümü</h3>
+  <div class="row">
+    <div class="col-4">
+      <h3 class="border-bottom">Menü Bölümü</h3>
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+          Dersler
+        </a>
+        <a href="#" class="list-group-item list-group-item-action"
+          >Haftalık Ders Programı</a
+        >
+        <a href="#" class="list-group-item list-group-item-action">Notlar</a>
+        <a href="#" class="list-group-item list-group-item-action">Profil</a>
+        <a href="#" class="list-group-item list-group-item-action disabled"
+          >Çıkış</a
+        >
+      </div>
+    </div>
+    <div class="col-8">
+      <h3 class="border-bottom">İçerik Bölümü</h3>
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+</div>
+{% endblock content%}

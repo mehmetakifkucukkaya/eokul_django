@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from eokul_app.models.student import Student
 
@@ -13,7 +14,8 @@ def student_login(request):
         
         if student is not None:
             request.session['student'] = student.id
-            return HttpResponseRedirect('/student/dashboard/')  # Öğrenci panosuna yönlendir
+            redirect_url = reverse("student-dashboard")
+            return HttpResponseRedirect(redirect_url)  # Öğrenci panosuna yönlendir
         else:
             return HttpResponse('Geçersiz öğrenci bilgileri.')
 
@@ -23,7 +25,7 @@ def student_login(request):
 def student_dashboard(req):
     
     if 'student' in req.session:
-        return HttpResponse("Student Dashboard")
+        return render(req, "eokul_app/student_dashboard.html")
     
     else :
         return HttpResponseRedirect('/')
