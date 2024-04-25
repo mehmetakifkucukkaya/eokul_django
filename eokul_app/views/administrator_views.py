@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from eokul_app.models import Administrator
 
 
@@ -11,8 +12,9 @@ def admin_login(request):
         admin = Administrator.objects.filter(username =username, password = password )
         
         if admin is not None:
-            # login(request, admin)
-            return HttpResponseRedirect('/admin/dashboard/')  # Admin panosuna yönlendir
+            request.session['admin'] = admin.id
+            redirect_url = reverse("admin-dashboard")
+            return HttpResponseRedirect(redirect_url)  # Admin panosuna yönlendir
         else:
             return HttpResponse('Geçersiz admin bilgileri.')
 

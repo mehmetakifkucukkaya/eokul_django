@@ -1,7 +1,6 @@
+import json
 from django.shortcuts import render
-from django.contrib.auth import login
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
 from eokul_app.models.student import Student
@@ -13,7 +12,16 @@ def student_login(request):
         student = Student.objects.filter(tc_no=tc_no, std_no=std_no).first()
         
         if student is not None:
-            request.session['student'] = student.id
+            serialized_student = {
+                'id' : student.id,
+                "first_name" : student.first_name,
+                'last_name' : student.last_name,
+                "tc_no" : student.tc_no,
+                "std_no" : student.std_no,
+                "grade" : student.grade,
+                "absentee" : student.absentee
+            }
+            request.session['student'] = json.dumps(serialized_student)
             redirect_url = reverse("student-dashboard")
             return HttpResponseRedirect(redirect_url)  # Öğrenci panosuna yönlendir
         else:
