@@ -1,9 +1,9 @@
 {% extends "eokul_app/student_dashboard.html" %} {% block section %}
-<h3>Öğrencinin Dersleri</h3>
+<h3>Öğrencinin Ders Programı</h3>
 
 <ul>
-  {% for lesson in lessons %}
-  <li>{{lesson.lesson_text}}</li>
+  {% for schedule in schedules %}
+  <li>{{schedule.}}</li>
   {% endfor %}
 </ul>
 {% endblock section %}
